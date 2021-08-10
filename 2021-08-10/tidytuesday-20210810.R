@@ -7,7 +7,7 @@ inv <- ttdata$investment
 inv$year <- as.Date(ISOdate(inv$year, 1, 1))
 
 # use the 'presidential' dataset to overlay info on who's in the White House over time
-# 'presidential' begins with Eisenhauer, but the tidytuesday dataset starts with Truman
+# 'presidential' begins with Eisenhower, but the tidytuesday dataset starts with Truman
 presidential <- rbind(presidential, 
                       data.frame(name="Truman", start="1945-04-12", end="1953-01-20", 
                                  party="Democratic"))
