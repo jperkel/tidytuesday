@@ -16,18 +16,16 @@ mydata <- inv %>%
   summarize(total = sum(gross_inv)) 
 
 # gross_inv in millions of USD, so divide by 1000 for billions
-ggplot() + 
+ggplot(mydata) + 
   theme_minimal() +
-  geom_point(data=mydata, 
-             mapping=aes(x = year, y = total/1000, color = meta_cat, group = meta_cat)) + 
-  geom_line(data=mydata, 
-            mapping=aes(x = year, y = total/1000, color = meta_cat, group = meta_cat)) +
+  geom_point(mapping=aes(x = year, y = total/1000, color = meta_cat, group = meta_cat)) + 
+  geom_line(mapping=aes(x = year, y = total/1000, color = meta_cat, group = meta_cat)) +
   geom_rect(data=presidential, 
             mapping=aes(xmin=start, xmax=end, ymin=-Inf, ymax=Inf),
             fill=ifelse(presidential$party == "Democratic", "blue","red"),
-            alpha=0.3, color = "black") + 
+            alpha=0.2, color = "grey50") + 
   geom_text(data=presidential,
-            mapping=aes(x=start+(end-start)/2, y = 500, label=name),
+            mapping=aes(x=start+(end-start)/2, y = 750, label=name),
             size=3, hjust = 1, check_overlap = TRUE, angle = 90) +
   labs(x = NULL, y = "Investment ($USD billions)",
        title = "US infrastructure spending, 1947-2016",
