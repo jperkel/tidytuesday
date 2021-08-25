@@ -36,8 +36,8 @@ p1 <- joined %>%
     title = "**Weight distribution of lemurs**  
     <span style='font-size:11pt'>
     <span style='color:#0072B2;'>Infant/juvenile</span>, 
-    <span style='color:#D55E00;'>young adult</span>, and
-    <span style='color:#009E73;'>adult</span>
+    <span style='color:#009E73;'>young adult</span>, and
+    <span style='color:#D55E00;'>adult</span>
     </span>",
     x = "Age (yrs)", y = "Weight (g)"
   ) +
