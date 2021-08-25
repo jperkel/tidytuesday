@@ -32,27 +32,15 @@ p1 <- joined %>%
   scale_color_manual(
     name = NULL,
     values = c(IJ = "#0072B2", young_adult = "#009E73", adult = "#D55E00")) +
-  labs(
-    title = "**Weight distribution of lemurs**  
-    <span style='font-size:11pt'>
-    <span style='color:#0072B2;'>Infant/juvenile</span>, 
-    <span style='color:#009E73;'>young adult</span>, and
-    <span style='color:#D55E00;'>adult</span>
-    </span>",
-    x = "Age (yrs)", y = "Weight (g)"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_markdown(lineheight = 1.1),
-    legend.text = element_markdown(size = 11)
-  )
+  labs(x = "Age (yrs)", y = "Weight (g)") +
+  theme_minimal() 
 
 # reordering boxblot by median:
 # ht: https://rpubs.com/crazyhottommy/reorder-boxplot
 p2 <- joined %>% 
   ggplot(mapping = aes(x = fct_reorder(common_name, weight_g, .fun=median), y = weight_g, 
                        color = age_category)) + 
-  geom_boxplot(show.legend = FALSE) +
+  geom_boxplot(show.legend = FALSE, outlier.alpha = 0.5) +
   labs(x=NULL, y=NULL) +
   scale_color_manual(
     name = NULL,
@@ -62,7 +50,9 @@ p2 <- joined %>%
 
 pfinal <- (p1 | p2) + 
   plot_annotation(
-    caption = "Source: DOI:10.1038/sdata.2014.19 (2014)\n#tidytuesday | @j_perkel | 2021-08-24"
+    title = "Weight distribution of <span style='color:#0072B2;'><strong>infant/juvenile</strong></span>, <span style='color:#009E73;'><strong>young adult</strong></span>, and <span style='color:#D55E00;'><strong>adult</strong></span> lemurs at the <strong>Duke Lemur Center</strong>",
+    caption = "Source: DOI:10.1038/sdata.2014.19 (2014)\n#tidytuesday | @j_perkel | 2021-08-24",
+    theme = theme(plot.title = element_markdown(lineheight = 1.1))
   )
 
 ggsave(here("2021-08-24-lemurs.jpg"), plot = pfinal, bg = "white", width = 10, 
