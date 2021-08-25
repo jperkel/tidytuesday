@@ -2,6 +2,7 @@ library(tidyverse)
 library(rvest)
 library(here)
 library(ggtext)
+# library(ggExtra)
 library(patchwork)
 
 lemurs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-08-24/lemur_data.csv')
@@ -34,6 +35,9 @@ p1 <- joined %>%
     values = c(IJ = "#0072B2", young_adult = "#009E73", adult = "#D55E00")) +
   labs(x = "Age (yrs)", y = "Weight (g)") +
   theme_minimal() 
+# ggExtra places histograms on the margins of the scatterplot... but the output 
+# is incompatible with {patchwork}
+# p1 <- ggExtra::ggMarginal(p1, groupFill = TRUE, groupColour = TRUE) 
 
 # reordering boxblot by median:
 # ht: https://rpubs.com/crazyhottommy/reorder-boxplot
